@@ -1,4 +1,5 @@
 let pokeAPI = 'https://pokeapi.co/api/v2/pokemon';
+let pokeDex = 'https://pokeapi.co/api/v2/pokedex/1';
 let nextPoke20;
 let prevPoke20;
 let pokeUl = document.querySelector('.pokeUl');
@@ -13,6 +14,25 @@ console.log('pokeUl: ', pokeUl);
 //     .catch(err => console.log(err));
 //   console.log("What's up");
 // };
+
+let fetchPokeDex = async api => {
+  const response = await fetch(api);
+  const pokeJson = await response.json();
+  let names = [];
+  for (let i = 0; i <= 151; i++) {
+    names.push(pokeJson.pokemon_entries[i].pokemon_species.name);
+  }
+  return names;
+  
+  
+  // return pokeJson.pokemon_entries[0].pokemon_species.name;
+  
+  //return pokeJson.pokemon_entries.length;
+};
+
+fetchPokeDex(pokeDex)
+  .then(console.log)
+  .catch(err => console.log(err));
 
 let fetchApi = async api => {
   const response = await fetch(api);
@@ -40,6 +60,6 @@ function pokeLoop(arr) {
   for (let i = 0; i < arr.length; i++) {
     pokeUl.appendChild(document.createElement('li')).innerText = arr[i].name;
     let li = document.querySelectorAll('li');
-    console.log(arr[i]);
+    //console.log(arr[i]);
   }
 }
