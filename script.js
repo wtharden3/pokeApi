@@ -8,8 +8,19 @@ let fetchPokeDex = async api => {
   const response = await fetch(api);
   const pokeJson = await response.json();
 
+//start empty array that we will will later return to use in the second fetch function (fetchPokeDex(pokeDex))
   let names = [];
 
+/**
+ * below we will target the O.G. pokemon (1-150)
+ * 
+ * we created a loop to do 4 things
+ * 1. create a li for each pokemon
+ * 2. assign the innerText of each li to a corresponding Pokemon
+ * 3. create a div class with the class of 'collapse' so we can later create a collapse that will reveal info about each pokemon listed
+ * 4. push each pokemon_species object from the api to the array names so we can run an api on the ..pokemon_species_[i].url later
+ *  in the fetchPokeDex(pokeDex) function later
+ */
   for (let i = 0; i <= 150; i++) {
     pokeUl.appendChild(document.createElement('li')).innerText =
       pokeJson.pokemon_entries[i].pokemon_species.name;
@@ -18,6 +29,12 @@ let fetchPokeDex = async api => {
       .setAttribute('class', 'collapse');
     names.push(pokeJson.pokemon_entries[i].pokemon_species);
   }
+
+  /**
+   * We want to add more attributes to all the list items (li) for bootstrap collapse component to work
+   * 
+   * we first assign the 
+   */
   let lis = document.querySelectorAll('li');
   //let divs = document.querySelectorAll('')
   // loop through all the nodes and assign a class attribute
