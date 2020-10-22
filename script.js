@@ -8,22 +8,23 @@ let fetchPokeDex = async api => {
   const response = await fetch(api);
   const pokeJson = await response.json();
 
-//start empty array that we will will later return to use in the second fetch function (fetchPokeDex(pokeDex))
+  //start empty array that we will will later return to use in the second fetch function (fetchPokeDex(pokeDex))
   let names = [];
 
-/**
- * below we will target the O.G. pokemon (1-150)
- * 
- * we created a loop to do 4 things
- * 1. create a li for each pokemon
- * 2. assign the innerText of each li to a corresponding Pokemon
- * 3. create a div class with the class of 'collapse' so we can later create a collapse that will reveal info about each pokemon listed
- * 4. push each pokemon_species object from the api to the array names so we can run an api on the ..pokemon_species_[i].url later
- *  in the fetchPokeDex(pokeDex) function later
- */
+  /**
+   * below we will target the O.G. pokemon (1-150)
+   *
+   * we created a loop to do 4 things
+   * 1. create a li for each pokemon
+   * 2. assign the innerText of each li to a corresponding Pokemon
+   * 3. create a div class with the class of 'collapse' so we can later create a collapse that will reveal info about each pokemon listed
+   * 4. push each pokemon_species object from the api to the array names so we can run an api on the ..pokemon_species_[i].url later
+   *  in the fetchPokeDex(pokeDex) function later
+   */
   for (let i = 0; i <= 150; i++) {
-    pokeUl.appendChild(document.createElement('li')).innerText =
-      pokeJson.pokemon_entries[i].pokemon_species.name;
+    pokeUl.appendChild(
+      document.createElement('li')
+    ).innerHTML = `<a data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample" href="#collapse${i}">${pokeJson.pokemon_entries[i].pokemon_species.name}</a>`;
     pokeUl
       .appendChild(document.createElement('div'))
       .setAttribute('class', 'collapse');
@@ -32,30 +33,30 @@ let fetchPokeDex = async api => {
 
   /**
    * We want to add more attributes to all the list items (li) for bootstrap collapse component to work
-   * 
+   *
    * we first assign the collection of li's to the variable lis
-   * 
+   *
    * we will also assign all the divs within the ul to collapsibleDivs
    */
   let lis = document.querySelectorAll('li');
   let collapsibleDivs = document.querySelectorAll('div.collapse');
-  console.log('collapsebleDivs: ', collapsibleDivs);
+  //console.log('collapsebleDivs: ', collapsibleDivs);
   //let divs = document.querySelectorAll('')
   // loop through all the nodes and assign a class attribute
 
   //testing something commenting this out for now to see if I can chain setAttribute above will still need this
-  for (li in lis) {
-    let classValue = `list-`;
-    let idValue = `collaspe${li}`;
-    let hrefValue = `#${idValue}`;
-    //this is targeting all li's to assign their data-toggle and href attributes
-    //lis[li].setAttribute('data-toggle', 'collapse');
-    //lis[li].setAttribute('href', hrefValue);
-    //console.log(lis[li]);
-  }
+  // for (li in lis) {
+  //   let classValue = `list-`;
+  //   let idValue = `collaspe${li}`;
+  //   let hrefValue = `#${idValue}`;
+  //   //this is targeting all li's to assign their data-toggle and href attributes
+  //   //lis[li].setAttribute('data-toggle', 'collapse');
+  //   //lis[li].innerHTML = `<a href=${hrefValue}></>setAttribute('href', hrefValue);
+  //   //console.log(lis[li]);
+  // }
 
-//repetitive, refactor later and use conditional to do certain things for divs and others for li === see function assignAttributes(array)
-  for(div in collapsibleDivs) {
+  //repetitive, refactor later and use conditional to do certain things for divs and others for li === see function assignAttributes(array)
+  for (div in collapsibleDivs) {
     console.log('div of collapsible div: ', div);
     let idValue = `collaspe${div}`;
     console.log(idValue);
@@ -94,8 +95,8 @@ async function innerFetch(api) {
 }
 
 //may need to delete
-function assignAttrbutes(array){
-  for (index in array) {
+function assignAttrbutes(array1, array2) {
+  for (index in array1) {
     let classValue = `list-`;
     let idValue = `collaspe${index}`;
     let hrefValue = `#${idValue}`;
@@ -103,6 +104,14 @@ function assignAttrbutes(array){
     lis[li].setAttribute('data-toggle', 'collapse');
     lis[li].setAttribute('href', hrefValue);
     console.log(lis[li]);
-    //this is targetting all collapsibleDivs and 
+  }
+  for (index in array2) {
+    //this is targetting all collapsibleDivs and
+
+    console.log('div of collapsible div: ', div);
+    let idValue = `collaspe${div}`;
+    console.log(idValue);
+    collapsibleDivs[div].setAttribute('id', idValue);
+    console.log(collapsibleDivs[div]);
   }
 }
