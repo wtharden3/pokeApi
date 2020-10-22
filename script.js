@@ -1,7 +1,7 @@
 let pokeAPI = 'https://pokeapi.co/api/v2/pokemon';
 let pokeDex = 'https://pokeapi.co/api/v2/pokedex/1';
 let pokeUl = document.querySelector('.pokeUl');
-console.log('pokeUl: ', pokeUl);
+//console.log('pokeUl: ', pokeUl);
 
 //The fetchPokeDex function declaration START below
 let fetchPokeDex = async api => {
@@ -33,17 +33,34 @@ let fetchPokeDex = async api => {
   /**
    * We want to add more attributes to all the list items (li) for bootstrap collapse component to work
    * 
-   * we first assign the 
+   * we first assign the collection of li's to the variable lis
+   * 
+   * we will also assign all the divs within the ul to collapsibleDivs
    */
   let lis = document.querySelectorAll('li');
+  let collapsibleDivs = document.querySelectorAll('div.collapse');
+  console.log('collapsebleDivs: ', collapsibleDivs);
   //let divs = document.querySelectorAll('')
   // loop through all the nodes and assign a class attribute
 
   //testing something commenting this out for now to see if I can chain setAttribute above will still need this
-  for (li of lis) {
+  for (li in lis) {
     let classValue = `list-`;
-    li.setAttribute('data-toggle', 'collapse');
-    console.log(li);
+    let idValue = `collaspe${li}`;
+    let hrefValue = `#${idValue}`;
+    //this is targeting all li's to assign their data-toggle and href attributes
+    //lis[li].setAttribute('data-toggle', 'collapse');
+    //lis[li].setAttribute('href', hrefValue);
+    //console.log(lis[li]);
+  }
+
+//repetitive, refactor later and use conditional to do certain things for divs and others for li === see function assignAttributes(array)
+  for(div in collapsibleDivs) {
+    console.log('div of collapsible div: ', div);
+    let idValue = `collaspe${div}`;
+    console.log(idValue);
+    collapsibleDivs[div].setAttribute('id', idValue);
+    console.log(collapsibleDivs[div]);
   }
 
   console.log(lis[1]);
@@ -74,4 +91,18 @@ async function innerFetch(api) {
   const res = await fetch(api);
   const json = await res.json();
   return json;
+}
+
+//may need to delete
+function assignAttrbutes(array){
+  for (index in array) {
+    let classValue = `list-`;
+    let idValue = `collaspe${index}`;
+    let hrefValue = `#${idValue}`;
+    //this is targeting all li's to assign their data-toggle and href attributes
+    lis[li].setAttribute('data-toggle', 'collapse');
+    lis[li].setAttribute('href', hrefValue);
+    console.log(lis[li]);
+    //this is targetting all collapsibleDivs and 
+  }
 }
