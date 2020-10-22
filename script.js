@@ -24,7 +24,7 @@ let fetchPokeDex = async api => {
   for (let i = 0; i <= 150; i++) {
     pokeUl.appendChild(
       document.createElement('li')
-    ).innerHTML = `<a data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample" href="#collapse${i}">${pokeJson.pokemon_entries[i].pokemon_species.name}</a>`;
+    ).innerHTML = `<a href="#collapse${i}" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapse${i}">${pokeJson.pokemon_entries[i].pokemon_species.name}</a>`;
     pokeUl
       .appendChild(document.createElement('div'))
       .setAttribute('class', 'collapse');
@@ -38,8 +38,8 @@ let fetchPokeDex = async api => {
    *
    * we will also assign all the divs within the ul to collapsibleDivs
    */
-  let lis = document.querySelectorAll('li');
-  let collapsibleDivs = document.querySelectorAll('div.collapse');
+  //let lis = document.querySelectorAll('li');
+  //let collapsibleDivs = document.querySelectorAll('div.collapse');
   //console.log('collapsebleDivs: ', collapsibleDivs);
   //let divs = document.querySelectorAll('')
   // loop through all the nodes and assign a class attribute
@@ -56,16 +56,16 @@ let fetchPokeDex = async api => {
   // }
 
   //repetitive, refactor later and use conditional to do certain things for divs and others for li === see function assignAttributes(array)
-  for (div in collapsibleDivs) {
-    console.log('div of collapsible div: ', div);
-    let idValue = `collaspe${div}`;
-    console.log(idValue);
-    collapsibleDivs[div].setAttribute('id', idValue);
-    console.log(collapsibleDivs[div]);
-  }
+  // for (div in collapsibleDivs) {
+  //   console.log('div of collapsible div: ', div);
+  //   let idValue = `collaspe${div}`;
+  //   console.log(idValue);
+  //   collapsibleDivs[div].setAttribute('id', idValue);
+  //   console.log(collapsibleDivs[div]);
+  // }
 
-  console.log(lis[1]);
-  console.log('names: ', names[0]);
+  //console.log(lis[1]);
+  //console.log('names: ', names[0]);
   //we are returning an array of objects.
   //names will return {name: 'pokemonname', url: 'https://apiforthatpokemon'}
   return names;
@@ -79,11 +79,29 @@ fetchPokeDex(pokeDex)
     //nedd to loop conditionally
     //match two variables
     //loop through data[i].name and data[i].url
-    let lis = document.querySelectorAll('li');
+    let divs = document.querySelectorAll('li');
     // loop through all the nodes and assign a class attribute
     //console.log('lis: ', lis);
+    let collapsibleDivs = document.querySelectorAll('div.collapse');
     innerFetch(data[0].url)
-      .then(console.log)
+      .then(newApi => {
+        console.log(newApi);
+        console.log('color.name: ', newApi.color.name);
+        console.log('egg_groups: ', newApi.egg_groups.length);
+        for (let i = 0; i < newApi.egg_groups.length; i++) {
+          console.log(newApi.egg_groups[i].name);
+        }
+        // for (group in newApi.egg_groups) {
+        //   console.log(egg_groups[group].name);
+        // }
+        console.log('color.name: ', newApi.color.name);
+        //need to target specific info about pokemon and put in p tags
+        //need a loop to target each one and add data
+
+        //do later
+        //console.log(collapsibleDivs);
+        //console.log(collapsibleDivs[0]);
+      })
       .catch(err => console.log(err));
   })
   .catch(err => console.log(err));
