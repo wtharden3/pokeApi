@@ -2,6 +2,7 @@ let pokeAPI = 'https://pokeapi.co/api/v2/pokemon';
 let pokeDex = 'https://pokeapi.co/api/v2/pokedex/1';
 
 let pokeUl = document.querySelector('.pokeUl');
+pokeUl.setAttribute('class', 'row');
 //console.log('pokeUl: ', pokeUl);
 
 //The fetchPokeDex function declaration START below
@@ -15,8 +16,13 @@ let fetchPokeDex = async api => {
   console.log(pokeJson);
   for (let i = 0; i <= 150; i++) {
     let li = pokeUl.appendChild(document.createElement('li'));
+    li.setAttribute('class', 'col-4');
 
-    let div = pokeUl.appendChild(document.createElement('div'));
+    //li.appendChild(firstDiv + div)
+
+    let firstDiv = li.appendChild(document.createElement('div'));
+
+    let div = li.appendChild(document.createElement('div'));
     //running this api to get sprites for img src tag
     innerFetch(`https://pokeapi.co/api/v2/pokemon/${i + 1}/`).then(pokemon => {
       //console.log(pokemon);
@@ -24,7 +30,7 @@ let fetchPokeDex = async api => {
         pokemon.types[1] ? pokemon.types[1].type.name : ''
       }`;
       // created li's for each pokemon and then added a p tag with img and a tag and assigned some classes
-      li.innerHTML = `<p>
+      firstDiv.innerHTML = `<p>
 
       <img src="${
         pokemon.sprites.front_default ? pokemon.sprites.front_default : '#'
