@@ -21,15 +21,53 @@ let fetchPokeDex = async api => {
    * 4. push each pokemon_species object from the api to the array names so we can run an api on the ..pokemon_species_[i].url later
    *  in the fetchPokeDex(pokeDex) function later
    */
+  console.log(pokeJson);
   for (let i = 0; i <= 150; i++) {
-    pokeUl.appendChild(
-      document.createElement('li')
-    ).innerHTML = `<a href="#collapse${i}" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapse${i}">${pokeJson.pokemon_entries[i].pokemon_species.name}</a>`;
+    let li = pokeUl.appendChild(document.createElement('li'));
+
+    /**
+     * 
+     * 
+     * <img src="#" alt="${pokeJson.pokemon_entries[i].pokemon_species.name}">
+    
+    <a href="#collapse${
+      i + 1
+    }" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapse${
+      i + 1
+    }">${pokeJson.pokemon_entries[i].pokemon_species.name}</a>
+     */
+
+    // pokeUl.appendChild(document.createElement('li')).innerHTML = `<p>
+
+    //li.innerHTML = `<p></p>`;
+
+    //let liPara = document.querySelector('li p');
+
+    //to get sprites
+    innerFetch(`https://pokeapi.co/api/v2/pokemon/${i + 1}/`).then(pokemon => {
+      //console.log(pokemon.sprites);
+      li.innerHTML = `<p>
+
+      <img src="${
+        pokemon.sprites.front_default ? pokemon.sprites.front_default : '#'
+      }" alt="${pokeJson.pokemon_entries[i].pokemon_species.name}">
+    
+        <a href="#collapse${
+          i + 1
+        }" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapse${
+        i + 1
+      }">${pokeJson.pokemon_entries[i].pokemon_species.name}</a>
+      
+      </p>`;
+    });
+
     pokeUl
       .appendChild(document.createElement('div'))
       .setAttribute('class', 'collapse');
     names.push(pokeJson.pokemon_entries[i].pokemon_species);
   }
+  let allLis = document.querySelectorAll('.pokeUl > li');
+  // console.log('allLis[0]: ', allLis[0]);
 
   /**
    * We want to add more attributes to all the list items (li) for bootstrap collapse component to work
@@ -74,35 +112,95 @@ let fetchPokeDex = async api => {
 
 fetchPokeDex(pokeDex)
   .then(data => {
-    console.log('data[1].name: ', data[1].name, 'data[1].url', data[1].url);
+    //console.log('data[1].name: ', data[1].name, 'data[1].url', data[1].url);
     //details about specific pokemon below
     //nedd to loop conditionally
     //match two variables
     //loop through data[i].name and data[i].url
-    let divs = document.querySelectorAll('li');
+    //let divs = document.querySelectorAll('li');
     // loop through all the nodes and assign a class attribute
     //console.log('lis: ', lis);
-    let collapsibleDivs = document.querySelectorAll('div.collapse');
-    innerFetch(data[0].url)
-      .then(newApi => {
-        console.log(newApi);
-        console.log('color.name: ', newApi.color.name);
-        console.log('egg_groups: ', newApi.egg_groups.length);
-        for (let i = 0; i < newApi.egg_groups.length; i++) {
-          console.log(newApi.egg_groups[i].name);
-        }
-        // for (group in newApi.egg_groups) {
-        //   console.log(egg_groups[group].name);
-        // }
-        console.log('color.name: ', newApi.color.name);
-        //need to target specific info about pokemon and put in p tags
-        //need a loop to target each one and add data
 
-        //do later
-        //console.log(collapsibleDivs);
-        //console.log(collapsibleDivs[0]);
-      })
-      .catch(err => console.log(err));
+    // console.log(data);
+    // console.log('data.length: ', data.length);
+    // console.log(data[150].url);
+
+    //console.log(data[151].url);
+
+    let collapsibleDivs = document.querySelectorAll('div.collapse');
+
+    for (let j = 0; j < data.length; j++) {
+      innerFetch(data[j].url)
+        .then(newApi => {
+          // console.log(newApi);
+          // console.log('name: ', newApi.name);
+          // console.log('id: ', newApi.id);
+          // console.log('order: ', newApi.order);
+
+          if (newApi.evoles_from_species) {
+            console.log(
+              'evoles_from_species.name: ',
+              newApi.evoles_from_species.name
+            );
+          }
+
+          console.log('color.name: ', newApi.color.name);
+          //console.log('egg_groups: ', newApi.egg_groups.length);
+          for (let i = 0; i < newApi.egg_groups.length; i++) {
+            console.log(newApi.egg_groups[i].name);
+          }
+          if (newApi.is_legendary) {
+            console.log('Legendary Pokemon');
+          }
+          if (newApi.is_mythical) {
+            console.log('Mythical Pokemon');
+          }
+          console.log('isLegendary: ', newApi.is_legendary);
+          console.log('is_mythical: ', newApi.is_mythical);
+          // for (group in newApi.egg_groups) {
+          //   console.log(egg_groups[group].name);
+          // }
+          console.log('color.name: ', newApi.habitat.name);
+          console.log('__________________________________');
+          console.log('__________________________________');
+          //need to target specific info about pokemon and put in p tags
+          //need a loop to target each one and add data
+
+          //do later
+          //console.log(collapsibleDivs);
+          //console.log(collapsibleDivs[0]);
+        })
+        .catch(err => console.log(err));
+    }
+
+    // innerFetch(data[i].url)
+    //   .then(newApi => {
+    //     console.log(newApi);
+    //     console.log('color.name: ', newApi.color.name);
+    //     //console.log('egg_groups: ', newApi.egg_groups.length);
+    //     for (let i = 0; i < newApi.egg_groups.length; i++) {
+    //       console.log(newApi.egg_groups[i].name);
+    //     }
+    //     if (newApi.is_legendary) {
+    //       console.log('Legendary Pokemon');
+    //     }
+    //     if (newApi.is_mythical) {
+    //       console.log('Mythical Pokemon');
+    //     }
+    //     console.log('isLegendary: ', newApi.is_legendary);
+    //     console.log('is_mythical: ', newApi.is_mythical);
+    //     // for (group in newApi.egg_groups) {
+    //     //   console.log(egg_groups[group].name);
+    //     // }
+    //     console.log('color.name: ', newApi.habitat.name);
+    //     //need to target specific info about pokemon and put in p tags
+    //     //need a loop to target each one and add data
+
+    //     //do later
+    //     //console.log(collapsibleDivs);
+    //     //console.log(collapsibleDivs[0]);
+    //   })
+    //   .catch(err => console.log(err));
   })
   .catch(err => console.log(err));
 
