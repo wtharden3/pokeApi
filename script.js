@@ -1,5 +1,6 @@
 let pokeAPI = 'https://pokeapi.co/api/v2/pokemon';
 let pokeDex = 'https://pokeapi.co/api/v2/pokedex/1';
+
 let pokeUl = document.querySelector('.pokeUl');
 //console.log('pokeUl: ', pokeUl);
 
@@ -11,41 +12,14 @@ let fetchPokeDex = async api => {
   //start empty array that we will will later return to use in the second fetch function (fetchPokeDex(pokeDex))
   let names = [];
 
-  /**
-   * below we will target the O.G. pokemon (1-150)
-   *
-   * we created a loop to do 4 things
-   * 1. create a li for each pokemon
-   * 2. assign the innerText of each li to a corresponding Pokemon
-   * 3. create a div class with the class of 'collapse' so we can later create a collapse that will reveal info about each pokemon listed
-   * 4. push each pokemon_species object from the api to the array names so we can run an api on the ..pokemon_species_[i].url later
-   *  in the fetchPokeDex(pokeDex) function later
-   */
   console.log(pokeJson);
   for (let i = 0; i <= 150; i++) {
     let li = pokeUl.appendChild(document.createElement('li'));
 
-    /**
-     * 
-     * 
-     * <img src="#" alt="${pokeJson.pokemon_entries[i].pokemon_species.name}">
-    
-    <a href="#collapse${
-      i + 1
-    }" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapse${
-      i + 1
-    }">${pokeJson.pokemon_entries[i].pokemon_species.name}</a>
-     */
-
-    // pokeUl.appendChild(document.createElement('li')).innerHTML = `<p>
-
-    //li.innerHTML = `<p></p>`;
-
-    //let liPara = document.querySelector('li p');
-
-    //to get sprites
+    let div = pokeUl.appendChild(document.createElement('div'));
+    //running this api to get sprites for img src tag
     innerFetch(`https://pokeapi.co/api/v2/pokemon/${i + 1}/`).then(pokemon => {
-      //console.log(pokemon.sprites);
+      // created li's for each pokemon and then added a p tag with img and a tag and assigned some classes
       li.innerHTML = `<p>
 
       <img src="${
@@ -54,53 +28,31 @@ let fetchPokeDex = async api => {
     
         <a href="#collapse${
           i + 1
-        }" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapse${
+        }" data-toggle="collapse" data-target="#collapse${
+        i + 1
+      }" role="button" aria-expanded="false" aria-controls="#collapse${
         i + 1
       }">${pokeJson.pokemon_entries[i].pokemon_species.name}</a>
       
       </p>`;
+
+      div.setAttribute('class', 'collapse');
+      div.setAttribute('id', `collapse${i + 1}`);
+      div.innerHTML = `
+      <p>some stuff</p>
+    `;
     });
 
-    pokeUl
-      .appendChild(document.createElement('div'))
-      .setAttribute('class', 'collapse');
+    // let div = pokeUl.appendChild(document.createElement('div'));
+
+    // div.setAttribute('class', 'collapse');
+    // div.setAttribute('id', `collaspe1`);
+    // div.innerHTML = `
+    //   <p>some stuff</p>
+    // `;
+
     names.push(pokeJson.pokemon_entries[i].pokemon_species);
   }
-  //let allLis = document.querySelectorAll('.pokeUl > li');
-  // console.log('allLis[0]: ', allLis[0]);
-
-  /**
-   * We want to add more attributes to all the list items (li) for bootstrap collapse component to work
-   *
-   * we first assign the collection of li's to the variable lis
-   *
-   * we will also assign all the divs within the ul to collapsibleDivs
-   */
-  //let lis = document.querySelectorAll('li');
-  //let collapsibleDivs = document.querySelectorAll('div.collapse');
-  //console.log('collapsebleDivs: ', collapsibleDivs);
-  //let divs = document.querySelectorAll('')
-  // loop through all the nodes and assign a class attribute
-
-  //testing something commenting this out for now to see if I can chain setAttribute above will still need this
-  // for (li in lis) {
-  //   let classValue = `list-`;
-  //   let idValue = `collaspe${li}`;
-  //   let hrefValue = `#${idValue}`;
-  //   //this is targeting all li's to assign their data-toggle and href attributes
-  //   //lis[li].setAttribute('data-toggle', 'collapse');
-  //   //lis[li].innerHTML = `<a href=${hrefValue}></>setAttribute('href', hrefValue);
-  //   //console.log(lis[li]);
-  // }
-
-  //repetitive, refactor later and use conditional to do certain things for divs and others for li === see function assignAttributes(array)
-  // for (div in collapsibleDivs) {
-  //   console.log('div of collapsible div: ', div);
-  //   let idValue = `collaspe${div}`;
-  //   console.log(idValue);
-  //   collapsibleDivs[div].setAttribute('id', idValue);
-  //   console.log(collapsibleDivs[div]);
-  // }
 
   //console.log(lis[1]);
   //console.log('names: ', names[0]);
@@ -127,7 +79,7 @@ fetchPokeDex(pokeDex)
 
     //console.log(data[151].url);
 
-    let collapsibleDivs = document.querySelectorAll('div.collapse');
+    //let collapsibleDivs = document.querySelectorAll('div.collapse');
 
     for (let j = 0; j < data.length; j++) {
       innerFetch(data[j].url)
