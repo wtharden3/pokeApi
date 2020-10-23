@@ -40,17 +40,19 @@ let fetchPokeDex = async api => {
       
       </p>`;
 
-      div.setAttribute('class', 'collapse');
+      div.setAttribute('class', 'collapse card-body');
       div.setAttribute('id', `collapse${i + 1}`);
 
       //console.log('pokemon.id.length: ', pokemon.id.toString().length);
 
+      //top of div
+      // div.innerHTML = `<div class="card-body">`;
       if (pokemon.id.toString().length == 2) {
-        div.innerHTML = `<h2>Specs: </h2><p class="pokemonName">No: #0${pokemon.id}</p>`;
+        div.innerHTML = `<h2 class="card-title">Specs: </h2><p class="pokemonName">No: #0${pokemon.id}</p>`;
       } else if (pokemon.id.toString().length == 1) {
-        div.innerHTML = `<h2>Specs: </h2><p class="pokemonName">No: #00${pokemon.id}</p>`;
+        div.innerHTML = `<h2 class="card-title">Specs: </h2><p class="pokemonName">No: #00${pokemon.id}</p>`;
       } else {
-        div.innerHTML = `<h2>Specs: </h2><p class="pokemonName">No: #${pokemon.id}</p>`;
+        div.innerHTML = `<h2 class="card-title">Specs: </h2><p class="pokemonName">No: #${pokemon.id}</p>`;
       }
 
       div.innerHTML += `
@@ -88,6 +90,7 @@ let fetchPokeDex = async api => {
           div.innerHTML += `<p>Capture Rate: ${pokeSpecs.capture_rate}</p>`;
           div.innerHTML += `<p>Base Happiness: ${pokeSpecs.base_happiness}</p>`;
           div.innerHTML += `<p>Habitat: ${pokeSpecs.habitat.name}</p>`;
+          //last div
 
           // div.innerHTML += `<p>Evolves from: ${
           //   pokeSpecs.evolves_from_species
