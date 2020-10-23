@@ -66,7 +66,7 @@ let fetchPokeDex = async api => {
       .setAttribute('class', 'collapse');
     names.push(pokeJson.pokemon_entries[i].pokemon_species);
   }
-  let allLis = document.querySelectorAll('.pokeUl > li');
+  //let allLis = document.querySelectorAll('.pokeUl > li');
   // console.log('allLis[0]: ', allLis[0]);
 
   /**
