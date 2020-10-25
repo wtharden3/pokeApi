@@ -16,7 +16,7 @@ let fetchPokeDex = async api => {
   //start empty array that we will will later return to use in the second fetch function (fetchPokeDex(pokeDex))
   let names = [];
 
-  console.log(pokeJson);
+  //console.log(pokeJson);
   for (let i = 0; i <= 150; i++) {
     let li = pokeUl.appendChild(document.createElement('li'));
     li.setAttribute('class', 'col-sm-3 mx-1 my-3');
@@ -86,7 +86,7 @@ let fetchPokeDex = async api => {
 
       innerFetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemon.id}/`)
         .then(pokeSpecs => {
-          console.log(pokeSpecs);
+          //console.log(pokeSpecs);
           //console.log('pokeSpecs: ', pokeSpecs.is_legendary);
           //console.log('pokeSpecs: ', pokeSpecs.is_mythical);
           if (pokeSpecs.is_legendary) {
@@ -126,7 +126,7 @@ let fetchPokeDex = async api => {
 
 fetchPokeDex(pokeDex)
   .then(data => {
-    console.log(data.name);
+    //console.log(data.name);
   })
   .catch(err => console.log(err));
 
