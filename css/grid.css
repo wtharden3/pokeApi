@@ -8,13 +8,13 @@ ol li {
   box-shadow: 5px 5px 8px rgba(17, 17, 17, 0.8);
 }
 
-div p a {
+div a.pokeTitle {
   font-family: 'Pokemon Hollow', sans-serif;
   text-transform: capitalize;
   font-size: 24px;
 }
 
-div p a:link,
-div p a:visited {
+div a.pokeTitle:link,
+div a.pokeTitle:visited {
   color: black;
 }
