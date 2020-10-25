@@ -9,5 +9,12 @@ ol li {
 }
 
 div p a {
+  font-family: 'Pokemon Hollow', sans-serif;
   text-transform: capitalize;
+  font-size: 24px;
+}
+
+div p a:link,
+div p a:visited {
+  color: black;
 }

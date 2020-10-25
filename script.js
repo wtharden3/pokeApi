@@ -24,6 +24,7 @@ let fetchPokeDex = async api => {
     //li.appendChild(firstDiv + div)
 
     let firstDiv = li.appendChild(document.createElement('div'));
+    //firstDiv.setAttribute('class', 'flex-column');
 
     let div = li.appendChild(document.createElement('div'));
     //running this api to get sprites for img src tag
@@ -33,13 +34,14 @@ let fetchPokeDex = async api => {
         pokemon.types[1] ? pokemon.types[1].type.name : ''
       }`;
       // created li's for each pokemon and then added a p tag with img and a tag and assigned some classes
-      firstDiv.innerHTML = `<p>
+      firstDiv.innerHTML = `<div class="d-flex flex-column">
 
+      <div>
       <img src="${
         pokemon.sprites.front_default ? pokemon.sprites.front_default : '#'
       }" alt="${pokeJson.pokemon_entries[i].pokemon_species.name}">
-    
-        <a href="#collapse${
+      </div>
+        <a class="pokeTitle" href="#collapse${
           i + 1
         }" data-toggle="collapse" data-target="#collapse${
         i + 1
@@ -47,7 +49,7 @@ let fetchPokeDex = async api => {
         i + 1
       }">${pokeJson.pokemon_entries[i].pokemon_species.name}</a>
       
-      </p>`;
+      </div>`;
 
       div.setAttribute('class', 'collapse card-body');
       div.setAttribute('id', `collapse${i + 1}`);
@@ -69,9 +71,11 @@ let fetchPokeDex = async api => {
       
       <p class="pokemonName">Weight: ${pokemon.weight}lbs</p>`;
 
+      div.innerHTML += `<h3>Type: </h3>`;
+
       for (let i = 0; i < pokemon.types.length; i++) {
         div.innerHTML += `
-      <p class="pokemonName">${
+      <p class="pokemonName"> - ${
         pokemon.types[i] ? pokemon.types[i].type.name : ''
       }</p>`;
       }

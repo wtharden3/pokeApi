@@ -1,0 +1,17 @@
+@font-face {
+  font-family: 'Pokemon Hollow';
+  src: url('../assets/fonts/pokemon/Pokemon\ Hollow.ttf');
+}
+
+@font-face {
+  font-family: 'Pokemon Solid';
+  src: url('../assets/fonts/pokemon/Pokemon\ Solid.ttf');
+}
+
+h1 {
+  font-family: 'Pokemon Solid', sans-serif;
+}
+
+.pokeDark {
+  font-family: 'Pokemon Hollow', sans-serif;
+}
