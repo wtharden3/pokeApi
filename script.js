@@ -36,11 +36,11 @@ let fetchPokeDex = async api => {
       // created li's for each pokemon and then added a p tag with img and a tag and assigned some classes
       firstDiv.innerHTML = `<div class="d-flex flex-column">
 
-      <div>
-      <img src="${
-        pokemon.sprites.front_default ? pokemon.sprites.front_default : '#'
-      }" alt="${pokeJson.pokemon_entries[i].pokemon_species.name}">
-      </div>
+        <div class="mx-auto">
+          <img src="${
+            pokemon.sprites.front_default ? pokemon.sprites.front_default : '#'
+          }" alt="${pokeJson.pokemon_entries[i].pokemon_species.name}">
+        </div>
         <a class="pokeTitle" href="#collapse${
           i + 1
         }" data-toggle="collapse" data-target="#collapse${
