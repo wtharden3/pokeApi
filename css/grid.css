@@ -4,4 +4,10 @@ ol {
 
 ol li {
   border: 1px solid black;
+  /* box-shadow: offset-x | offset-y | blur-radius | color ; */
+  box-shadow: 5px 5px 8px rgba(17, 17, 17, 0.8);
+}
+
+div p a {
+  text-transform: capitalize;
 }
