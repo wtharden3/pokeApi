@@ -2,7 +2,10 @@ let pokeAPI = 'https://pokeapi.co/api/v2/pokemon';
 let pokeDex = 'https://pokeapi.co/api/v2/pokedex/1';
 
 let pokeUl = document.querySelector('.pokeUl');
-pokeUl.setAttribute('class', 'row');
+pokeUl.setAttribute(
+  'class',
+  'row justify-content-around align-content-between px-3 px-sm-0'
+);
 //console.log('pokeUl: ', pokeUl);
 
 //The fetchPokeDex function declaration START below
@@ -16,7 +19,7 @@ let fetchPokeDex = async api => {
   console.log(pokeJson);
   for (let i = 0; i <= 150; i++) {
     let li = pokeUl.appendChild(document.createElement('li'));
-    li.setAttribute('class', 'col-4');
+    li.setAttribute('class', 'col-sm-3 mx-1 my-3');
 
     //li.appendChild(firstDiv + div)
 
