@@ -57,11 +57,11 @@ let fetchPokeDex = async api => {
       //top of div
       // div.innerHTML = `<div class="card-body">`;
       if (pokemon.id.toString().length == 2) {
-        div.innerHTML = `<h2 class="card-title">Specs: </h2><p class="pokemonName">No: #0${pokemon.id}</p>`;
+        div.innerHTML = `<h2 class="card-title pokemonNo">#0${pokemon.id}</h2>`;
       } else if (pokemon.id.toString().length == 1) {
-        div.innerHTML = `<h2 class="card-title">Specs: </h2><p class="pokemonName">No: #00${pokemon.id}</p>`;
+        div.innerHTML = `<h2 class="card-title pokemonNo">#00${pokemon.id}</h2>`;
       } else {
-        div.innerHTML = `<h2 class="card-title">Specs: </h2><p class="pokemonName">No: #${pokemon.id}</p>`;
+        div.innerHTML = `<h2 class="card-title pokemonNo">#${pokemon.id}</h2>`;
       }
 
       div.innerHTML += `
