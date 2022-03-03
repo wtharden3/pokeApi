@@ -19,7 +19,7 @@ let fetchPokeDex = async api => {
   //console.log(pokeJson);
   for (let i = 0; i <= 150; i++) {
     let li = pokeUl.appendChild(document.createElement('li'));
-    li.setAttribute('class', 'col-sm-3 mx-1 my-3');
+    li.setAttribute('class', 'col-sm-3 mx-1 my-3 pokeLiItem');
 
     //li.appendChild(firstDiv + div)
 
@@ -135,3 +135,20 @@ async function innerFetch(api) {
   const json = await res.json();
   return json;
 }
+
+//Search Filter functionality
+
+//1. add event listener to search input
+const searchInput = document.querySelector('#searchInput');
+searchInput.addEventListener('keyup', e => {
+  const term = e.target.value.toLowerCase();
+  console.log(`term: ${term}`);
+  //2. get all list items and convert node list to array
+  const pokeNodeList = document.querySelectorAll('.pokeLiItem');
+  const pokemon = Array.from(pokeNodeList);
+  //console.log(pokemon);
+  //if e.key exist in the list we want to keep
+  // if e.kay does not exist we want to hide.
+  // applye filterHide class to the element
+})
+// filterPokeMon will be function

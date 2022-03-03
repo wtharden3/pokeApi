@@ -2,3 +2,7 @@
   background-color: rgba(250, 107, 75, 0.8);
   box-shadow: 0 2px 5px black;
 }
+
+.filterHide {
+  display: none;
+}
