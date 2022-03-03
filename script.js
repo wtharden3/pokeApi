@@ -146,7 +146,21 @@ searchInput.addEventListener('keyup', e => {
   //2. get all list items and convert node list to array
   const pokeNodeList = document.querySelectorAll('.pokeLiItem');
   const pokemon = Array.from(pokeNodeList);
-  //console.log(pokemon);
+  // const filteredPokemon = pokemon.filter(pokeLi => pokeLi);
+  // console.log(filteredPokemon[0].querySelector('a.pokeTitle').innerHTML);
+  pokemon.forEach(pokeLi => {
+   const pokeTitle = pokeLi.querySelector('a.pokeTitle').innerHTML;
+   // console.log(pokeTitle);
+   if (pokeTitle.includes(term)){
+    //  console.log(`pokeLi.classList: ${pokeLi.classList}`)
+     pokeLi.style.display = "table";
+     console.log(pokeTitle);
+   } else {
+     pokeLi.style.display = "none";
+   }
+  });
+  
+  
   //if e.key exist in the list we want to keep
   // if e.kay does not exist we want to hide.
   // applye filterHide class to the element
